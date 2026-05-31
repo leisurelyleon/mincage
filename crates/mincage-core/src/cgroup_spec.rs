@@ -68,6 +68,9 @@ mod tests {
             cpu_period_us: None,
         };
         let files = spec.controller_files();
-        assert_eq!(files, vec![("cpu.max".to_string(), "25000 100000".to_string())]);
+        assert_eq!(
+            files,
+            vec![("cpu.max".to_string(), "25000 100000".to_string())]
+        );
     }
 }

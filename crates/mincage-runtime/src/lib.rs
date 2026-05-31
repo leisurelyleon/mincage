@@ -10,6 +10,6 @@ pub mod error;
 pub mod linux_backend;
 
 pub use backend::{IsolationBackend, NoopBackend};
-pub use container::{launch, Container};
+pub use container::{Container, launch};
 pub use error::{RuntimeError, RuntimeResult};
 pub use linux_backend::LinuxBackend;

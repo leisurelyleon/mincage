@@ -55,7 +55,9 @@ impl ContainerConfig {
             return Err(CoreError::Validation("name must not be empty".to_string()));
         }
         if self.command.trim().is_empty() {
-            return Err(CoreError::Validation("command must not be empty".to_string()));
+            return Err(CoreError::Validation(
+                "command must not be empty".to_string(),
+            ));
         }
         Ok(())
     }

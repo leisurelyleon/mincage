@@ -6,8 +6,8 @@
 
 use std::ffi::CString;
 
-use nix::sys::wait::{waitpid, WaitStatus};
-use nix::unistd::{execvp, fork, ForkResult};
+use nix::sys::wait::{WaitStatus, waitpid};
+use nix::unistd::{ForkResult, execvp, fork};
 
 use mincage_core::{ContainerConfig, MountPlan};
 
@@ -46,7 +46,8 @@ impl<B: IsolationBackend> Container<B> {
 
     /// Applies cgroup limits to the child (performed by the parent post-fork).
     pub fn apply_cgroups(&self, config: &ContainerConfig, pid: i32) -> RuntimeResult<()> {
-        self.backend.apply_cgroups(&config.name, &config.cgroups, pid)
+        self.backend
+            .apply_cgroups(&config.name, &config.cgroups, pid)
     }
 }
 
@@ -140,6 +141,9 @@ mod tests {
     fn apply_cgroups_invokes_backend() {
         let container = Container::new(NoopBackend::new());
         container.apply_cgroups(&sample_config(), 1234).unwrap();
-        assert_eq!(container.backend().calls(), vec!["apply_cgroups".to_string()]);
+        assert_eq!(
+            container.backend().calls(),
+            vec!["apply_cgroups".to_string()]
+        );
     }
 }

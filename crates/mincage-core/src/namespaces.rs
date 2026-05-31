@@ -83,8 +83,9 @@ mod tests {
 
     #[test]
     fn from_iter_deduplicates() {
-        let set: NamespaceSet =
-            [Namespace::Pid, Namespace::Pid, Namespace::Uts].into_iter().collect();
+        let set: NamespaceSet = [Namespace::Pid, Namespace::Pid, Namespace::Uts]
+            .into_iter()
+            .collect();
         assert_eq!(set.iter().count(), 2);
     }
 

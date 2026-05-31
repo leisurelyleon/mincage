@@ -3,8 +3,8 @@
 use std::fs;
 use std::path::Path;
 
-use nix::mount::{mount, umount2, MntFlags, MsFlags};
-use nix::sched::{unshare, CloneFlags};
+use nix::mount::{MntFlags, MsFlags, mount, umount2};
+use nix::sched::{CloneFlags, unshare};
 use nix::unistd::{chdir, pivot_root, sethostname};
 
 use mincage_core::{CgroupSpec, MountFlag, MountPlan, Namespace, NamespaceSet};
@@ -141,7 +141,9 @@ mod tests {
 
     #[test]
     fn maps_namespaces_to_clone_flags() {
-        let set = NamespaceSet::new().with(Namespace::Pid).with(Namespace::Uts);
+        let set = NamespaceSet::new()
+            .with(Namespace::Pid)
+            .with(Namespace::Uts);
         let flags = clone_flags(&set);
         assert!(flags.contains(CloneFlags::CLONE_NEWPID));
         assert!(flags.contains(CloneFlags::CLONE_NEWUTS));
