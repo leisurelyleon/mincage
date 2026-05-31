@@ -1,0 +1,16 @@
+[package]
+name = "mincage-runtime"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+description = "The privileged Linux isolation layer for mincage (namespaces, cgroups, pivot_root)."
+
+[dependencies]
+mincage-core = { path = "../mincage-core" }
+thiserror.workspace = true
+
+[target.'cfg(target_os = "linux")'.dependencies]
+nix.workspace = true
