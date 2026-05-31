@@ -1,0 +1,30 @@
+[workspace]
+resolver = "3"
+members = [
+    "crates/mincage-core",
+    "crates/mincage-runtime",
+    "crates/mincage-cli",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+license = "MIT"
+authors = ["Joseph Edwards <josephleonedwards@gmail.com>"]
+repository = "https://github.com/leisurelyleon/mincage"
+description = "A minimal container runtime demonstrating Linux process isolation from first principles."
+
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+toml = "0.8"
+thiserror = "2"
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+# Linux-only syscall wrapper. Feature set kept tight to what we actually use.
+nix = { version = "0.29", features = ["sched", "mount", "process", "user", "fs", "signal"] }
+
+[profile.release]
+strip = true
+lto = "thin"
+codegen-units = 1
