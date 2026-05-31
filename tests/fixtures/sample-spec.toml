@@ -1,0 +1,11 @@
+name = "demo"
+command = "/bin/sh"
+args = ["-c", "echo 'hello from mincage'; hostname; ps aux"]
+hostname = "mincage-demo"
+rootfs = "/"
+namespaces = ["pid", "mount", "uts"]
+
+[cgroups]
+memory_max_bytes = 134217728
+cpu_quota_us = 50000
+cpu_period_us = 100000
