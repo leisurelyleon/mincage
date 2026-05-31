@@ -22,7 +22,7 @@ thiserror = "2"
 anyhow = "1"
 clap = { version = "4", features = ["derive"] }
 # Linux-only syscall wrapper. Feature set kept tight to what we actually use.
-nix = { version = "0.29", features = ["sched", "mount", "process", "user", "fs", "signal"] }
+nix = { version = "0.29", features = ["sched", "mount", "process", "user", "fs", "hostname", "signal"] }
 
 [profile.release]
 strip = true
